@@ -1,0 +1,45 @@
+module pipemem ( mwmem,malu,datain,clock,mem_clk,mmo);	// MEM stage
+	
+//MEM数据存取模块。其中包含对数据同步RAM的读写访问。// 注意 mem_clock。 
+//输入给该同步RAM的mem_clock 信号，模块内定义为 ram_clk。 
+//实验中可采用系统 clock 的反相信号作为mem_clock 信号（亦即 ram_clk）, 
+//即留给信号半个节拍的传输时间，然后在mem_clock 上沿时，读输出、或写输入。
+
+    input  mwmem, clock, mem_clk;
+    input [31:0]    malu, datain; //mb是sw写入的数据， mmo是读出的数据，malu是写入的地址
+	input [31:0]  	in_port0,in_port1, in_port2;
+
+	output [31:0] 	mmo;
+	output [31:0] 	out_port0, out_port1, out_port2;
+
+	wire [31:0] 	mem_dataout, io_dataout;
+    wire write_enable, write_dmem_enable;
+
+	assign write_enable = mwmem;
+    assign mmo = (malu[6:2] > 2) ? dataout_dmem : io_read_data;
+	assign write_dmem_enable = (malu[6:2] > 2) ? write_enable : 1'b0;
+
+
+	always @(posedge mem_clk) begin
+		if (malu[6:2] == 0) 
+			io_read_data <= in_port0;
+		else if (malu[6:2] == 1)
+			io_read_data <= in_port1;
+		else if (malu[6:2] == 2)
+			io_read_data <= in_port2;
+		else 
+			io_read_data <= 0;
+		 
+		if (write_enable && malu[6:2] < 3) begin
+			if (malu[6:2] == 0)
+				out_port0 <= datain;
+			else if (malu[6:2] == 1)
+				out_port1 <= datain;
+			else if (malu[6:2] == 2)
+				out_port2 <= datain;
+		end
+	end
+   
+	lpm_ram_dq_dram  dram(malu[6:2],mem_clk,datain,write_dmem_enable,dataout_dmem);	
+
+endmodule

@@ -1,0 +1,10 @@
+module in_port_adapter(sw, in_port0, in_port1, in_port2);
+
+	input [9:0] sw;
+	output [31:0] in_port0, in_port1, in_port2;
+
+	assign in_port0 = {28'b0, sw[3:0]};
+	assign in_port1 = {28'b0, sw[7:4]};
+	assign in_port2 = {30'b0, sw[9:8]};
+
+endmodule

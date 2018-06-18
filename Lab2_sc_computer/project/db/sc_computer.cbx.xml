@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="sc_computer">
+		<CBX_INST_ENTRY INSTANCE_NAME="|sc_computer|out_port_adapter:output_adapter|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_l3m.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|sc_computer|out_port_adapter:output_adapter|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_l3m.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|sc_computer|sc_datamem:datamem|lpm_ram_dq_dram:dram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_fgm1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|sc_computer|sc_instmem:instmem|lpm_rom_irom:irom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_22j1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|sc_computer|out_port_adapter:output_adapter|lpm_divide:Div2" CBX_FILE_NAME="lpm_divide_ibm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|sc_computer|out_port_adapter:output_adapter|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_l3m.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

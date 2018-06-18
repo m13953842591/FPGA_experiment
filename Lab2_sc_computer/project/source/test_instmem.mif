@@ -1,0 +1,35 @@
+DEPTH = 32;           % Memory depth and width are required %
+WIDTH = 32;           % Enter a decimal number %
+ADDRESS_RADIX = HEX;  % Address and value radixes are optional %
+DATA_RADIX = HEX;     % Enter BIN, DEC, HEX, or OCT; unless %
+                      % otherwise specified, radixes = HEX %
+CONTENT
+BEGIN
+[0..1F] : 00000000;   % Range--Every address from 0 to 1F = 00000000 %
+
+ 0 : 20110080;        % (00) MAIN: addi $17, $0, 128 #   in_port0 address of operand1         11000000 %
+ 1 : 20120084;        % (04)       addi $18, $0, 132 #   in_port1 address of operand2         11000100 %
+ 2 : 20140088;        % (08)       addi $20, $0, 136 #   in_port2 address of instruction kind 11001100 %
+ 3 : 2013008c;        % (0c)       addi $19, $0, 140 #   out_port1 address of res             10000000 %
+ 4 : 20040001;        % (10)       addi $4, $0, 1    #                                                 %
+ 5 : 20050002;        % (14)       addi $5, $0, 2    #                                                 %
+ 6 : 20060003;        % (18)       addi $6, $0, 3    #                                                 %
+ 7 : 8e280000;        % (1c) LOOP: lw $8, 0($17)     #                                                 %
+ 8 : 8e490000;        % (20)       lw $9, 0($18)     #                                                 %
+ 9 : 8e970000;        % (24)       lw $23, 0($20)    #                                                 %
+ A : 12e00004;        % (28)       beq $23, $0, ADD  #00                                               %
+ B : 12e40005;        % (2c)       beq $23, $4, SUB  #01                                               %
+ C : 12e50006;        % (30)       beq $23, $5, AND  #10                                               %
+ D : 12e60007;        % (34)       beq $23, $6, OR   #11                                               %
+ E : 08000007;        % (38)       j LOOP            #                                                 %
+ F : 01098020;        % (3c) ADD:  add $16, $8, $9   #                                                 %
+10 : 08000017;        % (40)       j SAVE            #                                                 %
+11 : 01098022;        % (44) SUB:  sub $16, $8, $9   #                                                 %
+12 : 08000017;        % (48)       j SAVE            #                                                 %
+13 : 01098024;        % (4c) AND:  and $16, $8, $9   #                                                 %
+14 : 08000017;        % (50)       j SAVE            #                                                 %
+15 : 01098025;        % (54) OR:   or $16, $8, $9    #                                                 %
+16 : 08000017;        % (58)       j SAVE            #                                                 %
+17 : ae700000;        % (5c) SAVE: sw $16, 0($19)    #                                                 %
+18 : 08000007;        % (60)       j LOOP            #                                                 %
+END ;

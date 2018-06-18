@@ -1,0 +1,55 @@
+DEPTH = 64;           % Memory depth and width are required %
+WIDTH = 32;           % Enter a decimal number %
+ADDRESS_RADIX = HEX;  % Address and value radixes are optional %
+DATA_RADIX = HEX;     % Enter BIN, DEC, HEX, or OCT; unless %
+                      % otherwise specified, radixes = HEX %
+CONTENT
+BEGIN
+[0..3F] : 00000000;   % Range--Every address from 0 to 1F = 00000000 %
+
+ 0 : 20110080;        % (00) MAIN: addi $17, $0, 128 #   in_port0 address of operand1         11000000 %
+ 1 : 20120084;        % (04)       addi $18, $0, 132 #   in_port1 address of operand2         11000100 %
+ 2 : 20140088;        % (08)       addi $20, $0, 136 #   in_port2 address of instruction kind 11001100 %
+ 3 : 2013008c;        % (0c)       addi $19, $0, 140 #   out_port1 address of res             10000000 %
+ 4 : 20040001;        % (10)       addi $4, $0, 1    #                                                 %
+ 5 : 20050002;        % (14)       addi $5, $0, 2    #                                                 %
+ 6 : 20060003;        % (18)       addi $6, $0, 3    #                                                 %
+ 7 : 8e280000;        % (1c) LOOP: lw $8, 0($17)     #                                                 %
+ 8 : 8e490000;        % (20)       lw $9, 0($18)     #                                                 %
+ 9 : 8e970000;        % (24)       lw $23, 0($20)    #                                                 %
+ A : 12e0000e;        % (28)       beq $23, $0, ADD  #00                                               %
+ B : 20010000;        % (2c)       addi $1, $0, 0    #delayslot                                        %
+ C : 20010000;        % (30)       addi $1, $0, 0    #delayslot                                        %
+ D : 12e4000f;        % (34)       beq $23, $4, SUB  #01                                               %
+ E : 20010000;        % (38)       addi $1, $0, 0    #delayslot                                        %
+ F : 20010000;        % (3c)       addi $1, $0, 0    #delayslot                                        %
+10 : 12e50010;        % (40)       beq $23, $5, AND  #10                                               %
+11 : 20010000;        % (44)       addi $1, $0, 0    #delayslot                                        %
+12 : 20010000;        % (48)       addi $1, $0, 0    #delayslot                                        %
+13 : 12e60011;        % (4c)       beq $23, $6, OR   #11                                               %
+14 : 20010000;        % (50)       addi $1, $0, 0    #delayslot                                        %
+15 : 20010000;        % (54)       addi $1, $0, 0    #delayslot                                        %
+16 : 08000007;        % (58)       j LOOP            #                                                 %
+17 : 20010000;        % (5c)       addi $1, $0, 0    #delayslot                                        %
+18 : 20010000;        % (60)       addi $1, $0, 0    #delayslot                                        %
+19 : 01098020;        % (64) ADD:  add $16, $8, $9   #                                                 %
+1A : 08000029;        % (68)       j SAVE            #                                                 %
+1B : 20010000;        % (6c)       addi $1, $0, 0    #delayslot                                        %
+1C : 20010000;        % (70)       addi $1, $0, 0    #delayslot                                        %
+1D : 01098022;        % (74) SUB:  sub $16, $8, $9   #                                                 %
+1E : 08000029;        % (78)       j SAVE            #                                                 %
+1F : 20010000;        % (7c)       addi $1, $0, 0    #delayslot                                        %
+20 : 20010000;        % (80)       addi $1, $0, 0    #delayslot                                        %
+21 : 01098024;        % (84) AND:  and $16, $8, $9   #                                                 %
+22 : 08000029;        % (88)       j SAVE            #                                                 %
+23 : 20010000;        % (8c)       addi $1, $0, 0    #delayslot                                        %
+24 : 20010000;        % (90)       addi $1, $0, 0    #delayslot                                        %
+25 : 01098025;        % (94) OR:   or $16, $8, $9    #                                                 %
+26 : 08000029;        % (98)       j SAVE            #                                                 %
+27 : 20010000;        % (9c)       addi $1, $0, 0    #delayslot                                        %
+28 : 20010000;        % (a0)       addi $1, $0, 0    #delayslot                                        %
+29 : ae700000;        % (a4) SAVE: sw $16, 0($19)    #                                                 %
+2A : 08000007;        % (a8)       j LOOP            #                                                 %
+2B : 20010000;        % (ac)       addi $1, $0, 0    #delayslot                                        %
+2C : 20010000;        % (b0)       addi $1, $0, 0    #delayslot                                        %
+END ;

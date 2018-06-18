@@ -1,0 +1,41 @@
+MAIN:   addi $4, $0, 1
+        addi $5, $0, 2
+        addi $6, $0, 3
+LOOP:   lw $8, 128($0)
+        lw $9, 132($0)
+        lw $23, 136($0) 
+        beq $23, $0, ADD        #00 
+        addi $1, $0, 0          #delayslot
+        addi $1, $0, 0          #delayslot
+        beq $23, $4, SUB        #01
+        addi $1, $0, 0          #delayslot
+        addi $1, $0, 0          #delayslot
+        beq $23, $5, AND        #10
+        addi $1, $0, 0          #delayslot
+        addi $1, $0, 0          #delayslot
+        beq $23, $6, OR         #11
+        addi $1, $0, 0          #delayslot
+        addi $1, $0, 0          #delayslot
+        j LOOP
+        addi $1, $0, 0          #delayslot
+        addi $1, $0, 0          #delayslot
+ADD:    add $16, $8, $9
+        j SAVE
+        addi $1, $0, 0          #delayslot
+        addi $1, $0, 0          #delayslot
+SUB:    sub $16, $8, $9
+        j SAVE
+        addi $1, $0, 0          #delayslot
+        addi $1, $0, 0          #delayslot
+AND:    and $16, $8, $9
+        j SAVE
+        addi $1, $0, 0          #delayslot
+        addi $1, $0, 0          #delayslot
+OR:     or $16, $8, $9
+        j SAVE
+        addi $1, $0, 0          #delayslot
+        addi $1, $0, 0          #delayslot
+SAVE:   sw $16, 140($0)
+        j LOOP
+        addi $1, $0, 0          #delayslot
+        addi $1, $0, 0          #delayslot

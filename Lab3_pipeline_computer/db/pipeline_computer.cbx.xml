@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="pipeline_computer">
+		<CBX_INST_ENTRY INSTANCE_NAME="|pipeline_computer|pipeif:inst2|lpm_rom_irom:irom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_22j1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|pipeline_computer|pipemem:inst8|lpm_ram_dq_dram:dram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_fgm1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|pipeline_computer|pipemem:inst8|out_port_adapter:port2FPGA|lpm_divide:Div2" CBX_FILE_NAME="lpm_divide_ibm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|pipeline_computer|pipemem:inst8|out_port_adapter:port2FPGA|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_l3m.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|pipeline_computer|pipemem:inst8|out_port_adapter:port2FPGA|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_l3m.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|pipeline_computer|pipemem:inst8|out_port_adapter:port2FPGA|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_l3m.tdf"/>
+	</PROJECT>
+</LOG_ROOT>
